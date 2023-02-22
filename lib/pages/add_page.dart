@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
+
+import '../models/todo.dart';
+import '../provider/todo_provider.dart';
 
 class AddPage extends StatelessWidget {
   AddPage({Key? key}) : super(key: key);
@@ -31,7 +36,11 @@ class AddPage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<TodoProvider>().add(
+                      Todo(id: Uuid().v1(), title: todoController.text),
+                    );
+              },
               style: ButtonStyle(
                 backgroundColor:
                     MaterialStateProperty.all<Color>(Colors.amber.shade300),
